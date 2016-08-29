@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+<head>
+<meta charset="utf-8" />
+<title>Hola Mundo Angularjs</title>
+    <!-- Incluimos librerias como bootstrap.css -->
+    <link rel="stylesheet" href="../libs/css/bootstrap.min.css" type="text/css" />
+    <!-- Agregamos primero jQuery antes que angular es una buena practica -->
+    <script src="../libs/js/ui-bootstrap-tpls-0.10.0.min.js"></script>
+    <script src="../libs/js/angular.min.js"></script>
+    <script src="../libs/js/angular-resource.min.js"></script>
+    <script src="../libs/js/jquery-1.9.0.min.js"></script>
+</head>
+<body>
+	<div ng-controller='HelloController'>
+    	<p class="lead">Hello {{target}}</p> 
+    </div>
+</body> 
+<script type="text/javascript"> 
+	function HelloController($scope){ $scope.target = 'world' } 
+</script>
+</html> 

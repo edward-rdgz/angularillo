@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Hola Mundo Angularjs</title>
+    <!-- Incluimos librerias como bootstrap.css -->
+    <link rel="stylesheet" href="../libs/css/bootstrap.min.css" type="text/css" />
+    <!-- Agregamos primero jQuery antes que angular es una buena practica -->
+    <script src="../libs/js/jquery-1.9.0.min.js"></script>
+    <script src="../libs/js/angular.min.js"></script>
+    <script src="../libs/js/angular-resource.min.js"></script>
+    <script src="../libs/js/angular.ui.js"></script>
+    <script src="../libs/js/ui-bootstrap-tpls-0.10.0.min.js"></script>
+    <script src="js/controller.js"></script>
+</head>
+<body class="ng-scope" ng-app="myApp">
+	<div ng-controller="myAppList" class="ng-scope">
+    <div ng-controller="myAppList">
+    <select ng-model="query" ng-options="c.cat as c.cat for c in products | unique:'cat'">
+        <option value="0">Default</option>
+    </select>
+
+    <ul>
+        <li ng-repeat="c in products | filter:{cat:query}">
+            {{c.name}}
+        </li>
+    </ul>
+</div>
+</div>
+</body> 
+
+</html> 

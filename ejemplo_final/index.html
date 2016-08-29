@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html ng-app="listpp" ng-app lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+    ul>li, a{cursor: pointer;}
+    </style>
+    <title>Angular With PHP</title>
+	<script src="../libs/js/angular.min.js">
+	</script>
+	<script src="controller.js"></script>
+</head>
+<body>
+
+<div class="navbar navbar-default" id="navbar">
+    <div class="container" id="navbar-container">
+
+<div ng-controller="PhoneListCtrl">
+
+
+	<br/>
+	<hr>
+		<h4 align="center">Agregar producto</h4>
+		<form name="add_producto" class="wrapper">
+			<input type="hidden" name="prod_id" ng-model="prod_id">
+			<input type="text" name="prod_nombre" ng-model="prod_nombre" placeholder="Nombre del producto">
+			<input type="text" name="prod_desc" ng-model="prod_desc" placeholder="Descripción">
+			<input type="text" name="prod_precio" ng-model="prod_precio" placeholder="Precio">
+			<input type="text" name="prod_cantidad" ng-model="prod_cantidad" placeholder="Cantidad">
+			<input type="button" name="submit_producto" ng-show='add_prod' value="Submit" ng-click="producto_submit()" ng-show="filteredItems == 0">
+			<input type="button" name="update_producto" ng-show='update_prod' value="Update" ng-click="update_producto()">
+		</form>
+		<br/>		
+		<!-- <h4>Search producto</h4>
+		<div class="input-append">
+			<input type="text" ng-model="producto_nombre" ng-change="search()" class="input-large search-query" placeholder="Buscar por producto">
+			<span class="add-on"><i class="icon-search"></i></span>
+		</div> -->
+	    <br/>
+	    <br/>
+<br/>
+    <div class="row">
+        <div class="col-md-2">Paginar de:
+            <select ng-model="entryLimit" class="form-control">
+                <option>5</option>
+                <option>10</option>
+                <option>20</option>
+                <option>50</option>
+                <option>100</option>
+            </select>
+        </div>
+        <div class="col-md-3">Filtro:
+            <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <h5> {{ filtered.length }} de {{ totalItems}} productos</h5>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12" ng-show="filteredItems > 0">
+            <table class="table table-striped table-bordered">
+            <thead>
+            <th>ID&nbsp;<a ng-click="sort_by('id');"></a></th>
+            <th>Nombre del Producto&nbsp;<a ng-click="sort_by('prod_nombre');"></a></th>
+            <th>Descripción&nbsp;<a ng-click="sort_by('prod_desc');"></a></th>
+            <th>Precio&nbsp;<a ng-click="sort_by('prod_precio');"></a></th>
+            <th>Cantidad&nbsp;<a ng-click="sort_by('prod_cantidad');"></a></th>  
+            <th>Operaciones</th>         
+            </thead>
+            <tbody ng-init="get_producto()">
+                <tr ng-repeat="producto in filtered = (pagedItems | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                    <td>{{ producto.id }}</td>
+                    <td>{{ producto.prod_nombre | uppercase }}</td>
+                    <td>{{ producto.prod_desc }}</td>
+                    <td>{{ producto.prod_precio }}</td>
+                    <td>{{ producto.prod_cantidad }}</td>    
+                    <td><a href="" ng-click="prod_edit(producto.id)">Edit</a> | <a href="" ng-click="prod_delete(producto.id)">Delete</a></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        <div class="col-md-12" ng-show="filteredItems == 0">
+            <div class="col-md-12">
+                <h4>No customers found</h4>
+            </div>
+        </div>
+        <div class="col-md-12" ng-show="filteredItems > 0">    
+            <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="../libs/js/ui-bootstrap-tpls-0.10.0.min.js"></script>
+      
+    </body>
+</html>
